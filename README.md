@@ -11,6 +11,7 @@ or [download](https://github.com/myguidingstar/chloride/downloads) the jar file.
 
 ## Usage
 
+Start [esparse-server](https://github.com/myguidingstar/simple-esparse-server), then:
 ```
 java -jar chloride-0.1.0-standalone.jar -r 2000 some-dirs-or-files
 ```
