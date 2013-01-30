@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Chloride by myguidingstar</title>
+    <title>Chloride by chlorinejs</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -18,18 +18,18 @@
 
       <header>
         <h1>Chloride</h1>
-        <p>Command-line tool to convert js files to Clojure/[Chlorine](https://github.com/myguidingstar/chlorine) ones.</p>
+        <p>Command-line tool to convert js files to Clojure/Chlorine ones.</p>
       </header>
 
       <div id="banner">
         <span id="logo"></span>
 
-        <a href="https://github.com/myguidingstar/chloride" class="button fork"><strong>View On GitHub</strong></a>
+        <a href="https://github.com/chlorinejs/chloride" class="button fork"><strong>View On GitHub</strong></a>
         <div class="downloads">
           <span>Downloads:</span>
           <ul>
-            <li><a href="https://github.com/myguidingstar/chloride/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/myguidingstar/chloride/tarball/master" class="button">TAR</a></li>
+            <li><a href="https://github.com/chlorinejs/chloride/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/chlorinejs/chloride/tarball/master" class="button">TAR</a></li>
           </ul>
         </div>
       </div><!-- end banner -->
@@ -41,23 +41,33 @@
       <section>
         <h1>Chloride</h1>
 
-<p>Command-line tool to convert js files to Clojure/<a href="https://github.com/myguidingstar/chlorine">Chlorine</a> ones.</p>
+<p>Command-line tool to convert js files to Clojure/<a href="https://github.com/chlorinejs/chlorine">Chlorine</a> ones.</p>
 
 <h2>Get Chloride</h2>
 
-<p>You can build chloride with:</p>
+<p>You can build chloride with Leiningen:</p>
 
 <pre><code>lein uberjar
 </code></pre>
 
-<p>or <a href="https://github.com/myguidingstar/chloride/downloads">download</a> the jar file.</p>
-
 <h2>Usage</h2>
 
-<p>Start <a href="https://github.com/myguidingstar/simple-esparse-server">esparse-server</a>, then:</p>
+<p>You need esparse-cl2 installed before converting files.</p>
 
-<pre><code>java -jar chloride-0.1.0-standalone.jar -r 2000 some-dirs-or-files
+<pre><code>sudo npm install -g esparse-cl2
 </code></pre>
+
+<p>... and convert!</p>
+
+<pre><code>java -jar ${PATH_TO}/chloride-0.1.1-SNAPSHOT-standalone.jar some-dirs-or-files
+</code></pre>
+
+<p>or pipe directly (with <code>-i</code> CLI option):</p>
+
+<pre><code>echo 'var x = 1' | java -jar ${PATH_TO}/chloride-0.1.1-SNAPSHOT-standalone.jar -i
+</code></pre>
+
+<p>Enjoy it!</p>
 
 <h2>License</h2>
 
@@ -66,7 +76,7 @@
 <p>Distributed under the Eclipse Public License, the same as Clojure.</p>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/myguidingstar">myguidingstar</a></p>
+        <p>Project maintained by <a href="https://github.com/chlorinejs">chlorinejs</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
