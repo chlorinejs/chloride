@@ -50,9 +50,12 @@
     (filter final-filter (mapcat #(-> % clojure.java.io/file file-seq) dirs))))
 
 (defn -main [& args]
-  (let [[{:keys [timeout help]} dirs banner]
+  (let [[{:keys [stdin timeout help]} dirs banner]
         (cli args
-             ["-h" "--help" "Show help"]
+             ["-h" "--help" "Show help" :default false :flag true]
+             ["-i" "--stdin"
+              "Converts string from stdin and outputs to stdout"
+              :default false :flag true]
              ["-t" "--timeout" "Timeout (in millisecond)"
               :parse-fn #(Integer. %)
               :default 5000]
@@ -66,8 +69,14 @@
         :ok true
         :error (do (println (:message status))
                    (System/exit 1))))
+    (cond
+     stdin
+     (doall (doseq [expr (js->cl2 (slurp *in*))]
+              (println expr)
+              (println)))
+     (not= [] dirs)
+     (convert timeout (get-files dirs))
 
-    (if (not= [] dirs)
-      (convert timeout (get-files dirs))
-      (println banner))
+     :default
+     (println banner))
     (System/exit 0)))
