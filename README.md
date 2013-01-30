@@ -10,7 +10,7 @@ lein uberjar
 
 ## Usage
 
-You need esparse-cl2 installed before converting files.
+You need [esparse-cl2](https://github.com/chlorinejs/esparse-cl2) installed before converting files.
 
 ```
 sudo npm install -g esparse-cl2
