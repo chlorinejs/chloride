@@ -1,6 +1,6 @@
 (ns chloride.core
-  (:use [chlorine.access :only [js->cl2 format-code]]
-        [chlorine.esparse :only [check-server]]
+  (:use [chlorinate.core :only [js->cl2 format-code]]
+        [chlorinate.esparse :only [check-esparse]]
         [chlorine.util :only [with-timeout]]
         [clojure.tools.cli :only [cli]])
   (:gen-class :main true))
@@ -50,7 +50,7 @@
     (filter final-filter (mapcat #(-> % clojure.java.io/file file-seq) dirs))))
 
 (defn -main [& args]
-  (let [[{:keys [rate timeout help]} dirs banner]
+  (let [[{:keys [timeout help]} dirs banner]
         (cli args
              ["-h" "--help" "Show help"]
              ["-t" "--timeout" "Timeout (in millisecond)"
@@ -61,15 +61,13 @@
       (println banner)
       (System/exit 0))
 
-    (case (check-server)
-      true true
-      false  (do (println "ERROR: Something wrong happened. Is the server address correct?")
-                 (System/exit 0))
-      :error (do (println "ERROR: Server not found! Please start it first!")
-                 (System/exit 0)))
+    (let [status (check-esparse)]
+      (case (:type status)
+        :ok true
+        :error (do (println (:message status))
+                   (System/exit 1))))
 
     (if (not= [] dirs)
-      (do
-        (println "")
-        (convert timeout (get-files dirs)))
-      (println banner))))
+      (convert timeout (get-files dirs))
+      (println banner))
+    (System/exit 0)))
