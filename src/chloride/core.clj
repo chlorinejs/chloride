@@ -72,7 +72,7 @@
     (cond
      stdin
      (doall (doseq [expr (js->cl2 (slurp *in*))]
-              (println expr)
+              (println (format-code expr))
               (println)))
      (not= [] dirs)
      (convert timeout (get-files dirs))
